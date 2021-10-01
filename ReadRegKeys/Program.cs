@@ -15,10 +15,11 @@ namespace ReadRegKeys
             RegKeyReader reader = new RegKeyReader();
            
             regKey = reader.Read(regKeyPath);
-
-            
+            foreach(var name in regKey)
+            {
+                Console.WriteLine(name);
+            }
+            Console.Read();
         }
-
-        
     }
 }

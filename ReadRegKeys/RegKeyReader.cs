@@ -12,9 +12,10 @@ namespace ReadRegKeys
             string[] inputSplitRegKey = regKeyPath.Split('\\');
             foreach (var item in inputSplitRegKey)
             {
-                int baseKeyIndexInPath = regKeyPath.IndexOf(item);
+                
                 if (item.Contains("HKEY"))
                 {
+                    int baseKeyIndexInPath = regKeyPath.IndexOf(item);
                     switch (item.Substring(5))
                     {
                         case "CURRENT_USER":
@@ -46,7 +47,7 @@ namespace ReadRegKeys
             {
                 string[] names = regKey.GetValueNames();
                 foreach (var name in names)
-                    key[name] = (string)regKey.GetValue(name);
+                    key[name] = regKey.GetValue(name).ToString();
             }
             return key;
         }
@@ -58,11 +59,10 @@ namespace ReadRegKeys
             {
                 string[] names = regKey.GetValueNames();
                 foreach (var name in names)
-                    key[name] = (string)regKey.GetValue(name);
+                    key[name] = regKey.GetValue(name).ToString();
             }
             return key;
         }
-
 
         private static Dictionary<string, string> GetLocalMachineRegKey(string path)
         {
@@ -71,7 +71,7 @@ namespace ReadRegKeys
             {
                 string[] names = regKey.GetValueNames();
                 foreach (var name in names)
-                    key[name] = (string)regKey.GetValue(name);
+                    key[name] = regKey.GetValue(name).ToString();
             }
             return key;
         }
@@ -83,7 +83,7 @@ namespace ReadRegKeys
             {
                 string[] names = regKey.GetValueNames();
                 foreach (var name in names)
-                    key[name] = (string)regKey.GetValue(name);
+                    key[name] = regKey.GetValue(name).ToString();
             }
             return key;
         }
@@ -95,7 +95,7 @@ namespace ReadRegKeys
             {
                 string[] names = regKey.GetValueNames();
                 foreach (var name in names)
-                    key[name] = (string)regKey.GetValue(name);
+                    key[name] = regKey.GetValue(name).ToString();
             }
             return key;
         }
