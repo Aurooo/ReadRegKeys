@@ -13,13 +13,20 @@ namespace ReadRegKeys
             Console.WriteLine("Registry key to read:");
             string regKeyPath = Console.ReadLine();
             RegKeyReader reader = new RegKeyReader();
-           
+            
             regKey = reader.Read(regKeyPath);
-            foreach(var name in regKey)
+            if (regKey == null)
             {
-                Console.WriteLine(name);
+                Console.WriteLine("can't find the key");
             }
-            Console.Read();
+            else
+            {
+                foreach (var name in regKey)
+                {
+                    Console.WriteLine(name);
+                }
+                Console.Read();
+            }
         }
     }
 }

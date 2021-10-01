@@ -6,37 +6,42 @@ namespace ReadRegKeys
 {
     class RegKeyReader
     {
+        public Dictionary<string, string> Key { get; private set; }
+        public RegKeyReader()
+        {
+            Key = new Dictionary<string, string>();
+        }
         public Dictionary<string, string> Read(string regKeyPath)
         {
-            Dictionary<string, string> regKey = new Dictionary<string, string>();
+            
             string[] inputSplitRegKey = regKeyPath.Split('\\');
             foreach (var item in inputSplitRegKey)
             {
-                
+
                 if (item.Contains("HKEY"))
                 {
                     int baseKeyIndexInPath = regKeyPath.IndexOf(item);
                     switch (item.Substring(5))
                     {
                         case "CURRENT_USER":
-                            regKey = GetCurrentUserRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
+                            Key = GetCurrentUserRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
                             break;
                         case "CLASSES_ROOT":
-                            regKey = GetClassesRootRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
+                            Key = GetClassesRootRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
                             break;
                         case "LOCAL_MACHINE":
-                            regKey = GetLocalMachineRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
+                            Key = GetLocalMachineRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
                             break;
                         case "USERS":
-                            regKey = GetUsersRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
+                            Key = GetUsersRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
                             break;
                         case "CURRENT_CONFIG":
-                            regKey = GetCurrentConfigRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
+                            Key = GetCurrentConfigRegKey(regKeyPath.Substring(baseKeyIndexInPath + item.Length + 1));
                             break;
                     }
                 }
             }
-            return regKey;
+            return Key;
         }
 
 
@@ -45,8 +50,8 @@ namespace ReadRegKeys
             Dictionary<string, string> key = new Dictionary<string, string>();
             using (RegistryKey regKey = Registry.CurrentUser.OpenSubKey(path))
             {
-                string[] names = regKey.GetValueNames();
-                foreach (var name in names)
+                string[] keyNames = regKey.GetValueNames();
+                foreach (var name in keyNames)
                     key[name] = regKey.GetValue(name).ToString();
             }
             return key;
@@ -57,8 +62,8 @@ namespace ReadRegKeys
             Dictionary<string, string> key = new Dictionary<string, string>();
             using (RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(path))
             {
-                string[] names = regKey.GetValueNames();
-                foreach (var name in names)
+                string[] keyNames = regKey.GetValueNames();
+                foreach (var name in keyNames)
                     key[name] = regKey.GetValue(name).ToString();
             }
             return key;
@@ -69,8 +74,8 @@ namespace ReadRegKeys
             Dictionary<string, string> key = new Dictionary<string, string>();
             using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(path))
             {
-                string[] names = regKey.GetValueNames();
-                foreach (var name in names)
+                string[] keyNames = regKey.GetValueNames();
+                foreach (var name in keyNames)
                     key[name] = regKey.GetValue(name).ToString();
             }
             return key;
@@ -81,8 +86,8 @@ namespace ReadRegKeys
             Dictionary<string, string> key = new Dictionary<string, string>();
             using (RegistryKey regKey = Registry.Users.OpenSubKey(path))
             {
-                string[] names = regKey.GetValueNames();
-                foreach (var name in names)
+                string[] keyNames = regKey.GetValueNames();
+                foreach (var name in keyNames)
                     key[name] = regKey.GetValue(name).ToString();
             }
             return key;
@@ -93,8 +98,8 @@ namespace ReadRegKeys
             Dictionary<string, string> key = new Dictionary<string, string>();
             using (RegistryKey regKey = Registry.CurrentConfig.OpenSubKey(path))
             {
-                string[] names = regKey.GetValueNames();
-                foreach (var name in names)
+                string[] keyNames = regKey.GetValueNames();
+                foreach (var name in keyNames)
                     key[name] = regKey.GetValue(name).ToString();
             }
             return key;
