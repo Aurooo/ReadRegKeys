@@ -4,12 +4,13 @@ using Microsoft.Win32;
 
 namespace ReadRegKeys
 {
-    class RegKeyReader : RegistryReader
+    class RegKeyReader
     {
         const int INDEX_OF_BASE_KEY_NAME = 5;
         const int ESCAPE = 1;
         public Dictionary<string, string> Read(string regKeyPath)
         {
+            var key = new Dictionary<string, string>();
             
             string[] inputSplitRegKey = regKeyPath.Split('\\');
             foreach (var keyName in inputSplitRegKey)
@@ -21,24 +22,24 @@ namespace ReadRegKeys
                     switch (keyName.Substring(INDEX_OF_BASE_KEY_NAME))
                     {
                         case "CURRENT_USER":
-                            BaseKey = Registry.CurrentUser;
-                            key = ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
+                            var cuRegistry = new CurrentUserRegistry();
+                            key = cuRegistry.ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
                             break;
                         case "CLASSES_ROOT":
-                            BaseKey = Registry.ClassesRoot;
-                            key = ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
+                            var crRegistry = new ClassesRootRegistry();
+                            key = crRegistry.ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
                             break;
                         case "LOCAL_MACHINE":
-                            BaseKey = Registry.LocalMachine;
-                            key = ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
+                            var lmRegistry = new LocalMachineRegistry();
+                            key = lmRegistry.ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
                             break;
                         case "USERS":
-                            BaseKey = Registry.Users;
-                            key = ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
+                            var uRegistry = new UsersRegistry();
+                            key = uRegistry.ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
                             break;
                         case "CURRENT_CONFIG":
-                            BaseKey = Registry.CurrentConfig;
-                            key = ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
+                            var ccRegistry = new CurrentConfigRegistry();
+                            key = ccRegistry.ReadRegKey(regKeyPath.Substring(baseKeyIndexInPath + keyName.Length + ESCAPE));
                             break;
                     }
                 }

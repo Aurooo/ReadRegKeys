@@ -9,15 +9,15 @@ namespace ReadRegKeys
 {
     abstract class RegistryReader : IReadRegistry
     {
-        public Dictionary<string, string> key;
-        public RegistryKey BaseKey { get; set; }
-        public RegistryReader()
+        protected readonly RegistryKey BaseKey;
+        protected RegistryReader(RegistryKey key)
         {
-            key = new Dictionary<string, string>();
+            BaseKey = key ?? throw new ArgumentNullException(nameof(key));
         }
         public Dictionary<string, string> ReadRegKey(string path)
         {
-            
+            var key = new Dictionary<string, string>();
+
             using (RegistryKey regKey = BaseKey.OpenSubKey(path))
             {
                 string[] keyNames = regKey.GetValueNames();

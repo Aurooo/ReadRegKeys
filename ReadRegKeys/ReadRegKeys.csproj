@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalMachineRegistry.cs" />
+    <Compile Include="CurrentUserRegistry.cs" />
+    <Compile Include="CurrentConfigRegistry.cs" />
+    <Compile Include="UsersRegistry.cs" />
+    <Compile Include="ClassesRootRegistry.cs" />
     <Compile Include="IReadRegistry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace ReadRegKeys
 {
-    public interface IReadRegistry
+    class CurrentUserRegistry : RegistryReader
     {
-        Dictionary<string, string> ReadRegKey(string path);
+        public CurrentUserRegistry() : base(Registry.CurrentUser)
+        {
+        }
     }
 }
