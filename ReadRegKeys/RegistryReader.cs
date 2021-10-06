@@ -18,7 +18,14 @@ namespace ReadRegKeys
         {
             var key = new Dictionary<string, string>();
 
-            using (RegistryKey regKey = BaseKey.OpenSubKey(path))
+            var pathArray = path.Split('\\');
+
+            var subKeyIndex = path.IndexOf(BaseKey.Name);
+            var subKey = path.Substring(subKeyIndex + BaseKey.Name.Length + 1);
+
+
+
+            using (RegistryKey regKey = BaseKey.OpenSubKey(subKey))
             {
                 string[] keyNames = regKey.GetValueNames();
                 foreach (var name in keyNames)
