@@ -14,9 +14,9 @@ namespace ReadRegKeys
         {
             BaseKey = baseKey ?? throw new ArgumentNullException(nameof(baseKey));
         }
-        public Dictionary<string, string> Read(string path)
+        public List<Element> Read(string path)
         {
-            var key = new Dictionary<string, string>();
+            var keyElements = new List<Element>();
 
             var baseKeyIndex = path.IndexOf(BaseKey.Name);
             var subKey = path.Substring(baseKeyIndex + BaseKey.Name.Length + 1);
@@ -27,9 +27,15 @@ namespace ReadRegKeys
             {
                 string[] names = Key.GetValueNames();
                 foreach (var name in names)
-                    key[name] = Key.GetValue(name).ToString();
+                {
+                    keyElements.Add(new Element
+                    {
+                        Name = name,
+                        Value = Key.GetValue(name).ToString()
+                    });
+                }
             }
-            return key;
+            return keyElements;
         }
     }
 }

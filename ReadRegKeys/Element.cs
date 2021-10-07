@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ReadRegKeys
 {
-    public interface IReadRegistry
+    public class Element
     {
-        List<Element> Read(string path);
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

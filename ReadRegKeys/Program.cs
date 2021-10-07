@@ -9,26 +9,19 @@ namespace ReadRegKeys
     {
         static void Main(string[] args)
         {
-            Dictionary<string, string> regKey;
 
             Console.WriteLine("Registry key to read:");
             string regKeyPath = Console.ReadLine();
 
             RegistryStream reader = new RegistryStream();
-            
-            regKey = reader.Read(regKeyPath);
-            if (regKey == null)
+
+            List<Element> keyElements = reader.Read(regKeyPath);
+
+            foreach (var element in keyElements)
             {
-                Console.WriteLine("can't find the key");
+                Console.WriteLine(element.Name + ": " + element.Value);
             }
-            else
-            {
-                foreach (var name in regKey)
-                {
-                    Console.WriteLine(name);
-                }
-                Console.Read();
-            }
+            Console.Read();
         }
     }
 }
