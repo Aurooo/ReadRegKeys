@@ -9,7 +9,7 @@ namespace ReadRegKeys
         
         public Dictionary<string, string> Read(string path)
         {
-            IReadRegistry registryReader = new RegKeyFactory().OpenBaseKey(path);
+            IReadRegistry registryReader = new RegistryFactory().GetBaseKey(path);
             return registryReader.Read(path);
         }
     }

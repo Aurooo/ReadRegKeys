@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ReadRegKeys
 {
-    class RegKeyFactory
+    class RegistryFactory
     {
         const int INDEX_OF_BASE_KEY_NAME = 5;
-        public IReadRegistry OpenBaseKey(string path)
+        public IReadRegistry GetBaseKey(string path)
         {
 
             var baseKey = path.Split('\\').Where(x => x.Contains("HKEY"))
@@ -20,19 +20,19 @@ namespace ReadRegKeys
             switch (baseKey.ToString())
             {
                 case "CURRENT_USER":
-                    return new CurrentUserRegistry();
+                    return new CurrentUser();
 
                 case "CLASSES_ROOT":
-                    return new ClassesRootRegistry();
+                    return new ClassesRoot();
 
                 case "LOCAL_MACHINE":
-                    return new LocalMachineRegistry();
+                    return new LocalMachine();
 
                 case "USERS":
-                    return new UsersRegistry();
+                    return new Users();
 
                 case "CURRENT_CONFIG":
-                    return new CurrentConfigRegistry();
+                    return new CurrentConfig();
 
                 default: throw new Exception($"No base key found for {nameof(path)}");
 

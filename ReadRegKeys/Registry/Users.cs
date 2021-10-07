@@ -7,9 +7,9 @@ using Microsoft.Win32;
 
 namespace ReadRegKeys
 {
-    class CurrentConfigRegistry : RegistryReader
+    class Users : RegistryReader
     {
-        public CurrentConfigRegistry() : base(Registry.CurrentConfig)
+        public Users() : base(Registry.Users)
         {
         }
     }

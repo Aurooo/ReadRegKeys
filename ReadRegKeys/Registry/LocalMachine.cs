@@ -7,9 +7,9 @@ using Microsoft.Win32;
 
 namespace ReadRegKeys
 {
-    class LocalMachineRegistry : RegistryReader
+    class LocalMachine : RegistryReader
     {
-        public LocalMachineRegistry() : base(Registry.LocalMachine)
+        public LocalMachine() : base(Registry.LocalMachine)
         {
         }
     }

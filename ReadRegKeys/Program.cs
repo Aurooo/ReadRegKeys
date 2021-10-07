@@ -9,9 +9,11 @@ namespace ReadRegKeys
     {
         static void Main(string[] args)
         {
-            Dictionary<string, string> regKey = new Dictionary<string, string>();
+            Dictionary<string, string> regKey;
+
             Console.WriteLine("Registry key to read:");
             string regKeyPath = Console.ReadLine();
+
             RegistryStream reader = new RegistryStream();
             
             regKey = reader.Read(regKeyPath);
