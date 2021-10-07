@@ -4,7 +4,7 @@ using Microsoft.Win32;
 
 namespace ReadRegKeys
 {
-    class RegistryStream
+    public class RegistryStream
     {
         
         public Dictionary<string, string> Read(string path)
