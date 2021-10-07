@@ -13,11 +13,11 @@ namespace ReadRegKeys
         public IReadRegistry OpenBaseKey(string path)
         {
 
-            var baseKeyName = path.Split('\\').Where(x => x.Contains("HKEY"))
+            var baseKey = path.Split('\\').Where(x => x.Contains("HKEY"))
                 .Select(x => x.Substring(INDEX_OF_BASE_KEY_NAME))
                 .SingleOrDefault().ToString();
             
-            switch (baseKeyName.ToString())
+            switch (baseKey.ToString())
             {
                 case "CURRENT_USER":
                     return new CurrentUserRegistry();

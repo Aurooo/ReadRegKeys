@@ -12,7 +12,7 @@ namespace ReadRegKeys
             Dictionary<string, string> regKey = new Dictionary<string, string>();
             Console.WriteLine("Registry key to read:");
             string regKeyPath = Console.ReadLine();
-            RegKeyReader reader = new RegKeyReader();
+            RegistryStream reader = new RegistryStream();
             
             regKey = reader.Read(regKeyPath);
             if (regKey == null)

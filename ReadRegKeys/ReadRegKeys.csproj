@@ -81,7 +81,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <Compile Include="RegistryReader.cs" />
-    <Compile Include="RegKeyReader.cs" />
+    <Compile Include="RegistryStream.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

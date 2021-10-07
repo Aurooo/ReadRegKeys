@@ -8,6 +8,6 @@ namespace ReadRegKeys
 {
     public interface IReadRegistry
     {
-        Dictionary<string, string> ReadRegKey(string path);
+        Dictionary<string, string> Read(string path);
     }
 }

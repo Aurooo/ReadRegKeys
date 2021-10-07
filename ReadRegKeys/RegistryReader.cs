@@ -10,26 +10,24 @@ namespace ReadRegKeys
     abstract class RegistryReader : IReadRegistry
     {
         protected readonly RegistryKey BaseKey;
-        protected RegistryReader(RegistryKey key)
+        protected RegistryReader(RegistryKey baseKey)
         {
-            BaseKey = key ?? throw new ArgumentNullException(nameof(key));
+            BaseKey = baseKey ?? throw new ArgumentNullException(nameof(baseKey));
         }
-        public Dictionary<string, string> ReadRegKey(string path)
+        public Dictionary<string, string> Read(string path)
         {
             var key = new Dictionary<string, string>();
 
-            var pathArray = path.Split('\\');
-
-            var subKeyIndex = path.IndexOf(BaseKey.Name);
-            var subKey = path.Substring(subKeyIndex + BaseKey.Name.Length + 1);
+            var baseKeyIndex = path.IndexOf(BaseKey.Name);
+            var subKey = path.Substring(baseKeyIndex + BaseKey.Name.Length + 1);
 
 
 
-            using (RegistryKey regKey = BaseKey.OpenSubKey(subKey))
+            using (RegistryKey Key = BaseKey.OpenSubKey(subKey))
             {
-                string[] keyNames = regKey.GetValueNames();
-                foreach (var name in keyNames)
-                    key[name] = regKey.GetValue(name).ToString();
+                string[] names = Key.GetValueNames();
+                foreach (var name in names)
+                    key[name] = Key.GetValue(name).ToString();
             }
             return key;
         }
