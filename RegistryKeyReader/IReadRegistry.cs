@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReadRegKeys
+namespace RegistryKeyReader
 {
     public interface IReadRegistry
     {
-        List<Element> Read(string path);
+        IEnumerable<RegistryValueElement> Read(string path);
     }
 }

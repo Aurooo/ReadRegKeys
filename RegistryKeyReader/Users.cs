@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace ReadRegKeys
+namespace RegistryKeyReader
 {
-    class ClassesRoot : RegistryReader
+    class Users : RegistryReader
     {
-        public ClassesRoot() : base(Registry.ClassesRoot)
+        public Users() : base(Registry.Users)
         {
         }
     }

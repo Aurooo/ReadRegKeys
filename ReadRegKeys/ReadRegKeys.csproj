@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B7CCA498-4B12-4045-9F26-378B69D8C6CB}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>ReadRegKeys</RootNamespace>
     <AssemblyName>ReadRegKeys</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -85,22 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Element.cs" />
-    <Compile Include="Registry\LocalMachine.cs" />
-    <Compile Include="Registry\CurrentUser.cs" />
-    <Compile Include="Registry\CurrentConfig.cs" />
-    <Compile Include="RegistryFactory.cs" />
-    <Compile Include="Registry\Users.cs" />
-    <Compile Include="Registry\ClassesRoot.cs" />
-    <Compile Include="IReadRegistry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Compile Include="RegistryReader.cs" />
-    <Compile Include="RegistryStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -113,6 +103,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RegistryKeyReader\RegistryKeyReader.csproj">
+      <Project>{776f67a3-32b4-48fc-a704-fa12f9f79ef9}</Project>
+      <Name>RegistryKeyReader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace ReadRegKeys
+namespace RegistryKeyReader
 {
-    class CurrentUser : RegistryReader
+    class ClassesRoot : RegistryReader
     {
-        public CurrentUser() : base(Registry.CurrentUser)
+        public ClassesRoot() : base(Registry.ClassesRoot)
         {
         }
     }

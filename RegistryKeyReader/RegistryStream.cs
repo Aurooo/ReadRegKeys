@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 
-namespace ReadRegKeys
+namespace RegistryKeyReader
 {
-    class RegistryStream
+    public class RegistryStream
     {
         
-        public List<Element> Read(string path)
+        public IEnumerable<RegistryValueElement> Read(string path)
         {
             IReadRegistry registryReader = new RegistryFactory().GetBaseKey(path);
             return registryReader.Read(path);

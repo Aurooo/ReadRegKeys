@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Win32;
+using RegistryKeyReader;
 
 
 namespace ReadRegKeys
@@ -15,7 +16,7 @@ namespace ReadRegKeys
 
             RegistryStream reader = new RegistryStream();
 
-            List<Element> keyElements = reader.Read(regKeyPath);
+            IEnumerable<RegistryValueElement> keyElements = reader.Read(regKeyPath);
 
             foreach (var element in keyElements)
             {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace ReadRegKeys
+namespace RegistryKeyReader
 {
     abstract class RegistryReader : IReadRegistry
     {
@@ -14,9 +14,11 @@ namespace ReadRegKeys
         {
             BaseKey = baseKey ?? throw new ArgumentNullException(nameof(baseKey));
         }
-        public List<Element> Read(string path)
+
+
+        public IEnumerable<RegistryValueElement> Read(string path)
         {
-            var keyElements = new List<Element>();
+            var keyElements = new List<RegistryValueElement>();
 
             var baseKeyIndex = path.IndexOf(BaseKey.Name);
             var subKey = path.Substring(baseKeyIndex + BaseKey.Name.Length + 1);
@@ -28,10 +30,16 @@ namespace ReadRegKeys
                 string[] names = Key.GetValueNames();
                 foreach (var name in names)
                 {
-                    keyElements.Add(new Element
+                    var valueKind = Key.GetValueKind(name);
+
+                    if (valueKind == RegistryValueKind.Binary)
+                        throw new NotImplementedException("Binary type is not supported");
+
+                    keyElements.Add(new RegistryValueElement
                     {
                         Name = name,
-                        Value = Key.GetValue(name).ToString()
+                        Value = Key.GetValue(name).ToString(),
+                        ValueType = Key.GetValueKind(name)
                     });
                 }
             }
