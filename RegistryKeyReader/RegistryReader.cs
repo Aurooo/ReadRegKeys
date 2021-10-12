@@ -27,7 +27,16 @@ namespace RegistryKeyReader
 
             using (RegistryKey Key = BaseKey.OpenSubKey(subKey))
             {
-                string[] names = Key.GetValueNames();
+                string[] names;
+
+                try
+                {
+                    names = Key.GetValueNames();
+                }catch(NullReferenceException ex)
+                {
+                    throw new Exception("Not an exsisting key");
+                }
+
                 foreach (var name in names)
                 {
                     var valueKind = Key.GetValueKind(name);

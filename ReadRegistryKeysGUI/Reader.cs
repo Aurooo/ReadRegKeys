@@ -21,39 +21,37 @@ namespace ReadRegistryKeysGUI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dvOutputSetup();
+            lblError.Text = "";
+            
 
             if (string.IsNullOrEmpty(tbInput.Text))
                 lblError.Text = "Insert a registry key to read";
-            else
+
+            try
             {
-
-                try
-                {
-                    var reader = new RegistryStream();
-
-                    var keyValues = reader.Read(tbInput.Text).ToList();
-
-                    dvOutput.AutoGenerateColumns = true;
-
-                    dvOutput.DataSource = keyValues;
-
-
-
-                }
-                catch (Exception error)
-                {
-                    lblError.Text = error.Message;
-                }
-                btnClear.Enabled = true;
+                var reader = new RegistryStream();
+                var keyValues = reader.Read(tbInput.Text).ToList();
+                dvOutput.AutoGenerateColumns = true;
+                dvOutput.DataSource = keyValues;
             }
+            catch (Exception error)
+            {
+                lblError.Text = error.Message;
+                return;
+            }
+
+            dvOutputSetup();
+
+            lblPath.Text = tbInput.Text + ":";
+            ClearInput();
+
+            btnClear.Enabled = true;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            tbInput.Clear();
-            dvOutput.Rows.Clear();
-            btnClear.Enabled = false;
+            ClearTable();
+            ClearInput();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -63,6 +61,10 @@ namespace ReadRegistryKeysGUI
 
         private void dvOutputSetup()
         {
+            if (dvOutput.Columns.Count == 3)
+                ClearTable();
+
+
             dvOutput.ReadOnly = true;
             dvOutput.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             dvOutput.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
@@ -73,6 +75,9 @@ namespace ReadRegistryKeysGUI
             InsertColumn(nameof(RegistryValueElement.Name), "Name");
             InsertColumn(nameof(RegistryValueElement.ValueType), "Type");
             InsertColumn(nameof(RegistryValueElement.Value), "Value");
+
+
+            dvOutput.Columns[2].Width = 300;
 
             dvOutput.Name = "Registry Key";
             dvOutput.AutoSizeRowsMode =
@@ -87,7 +92,6 @@ namespace ReadRegistryKeysGUI
                 DataGridViewSelectionMode.FullRowSelect;
         }
 
-
         public DataGridViewColumn GenerateColumn(string columnName, string displayValue)
         {
             var column = new DataGridViewTextBoxColumn();
@@ -100,6 +104,18 @@ namespace ReadRegistryKeysGUI
         public void InsertColumn(string columnName, string displayValue)
         {
             dvOutput.Columns.Add(GenerateColumn(columnName, displayValue));
+        }
+
+        private void ClearTable()
+        {
+            dvOutput.Columns.Clear();
+            lblPath.Text = "";
+            btnClear.Enabled = false;
+        }
+
+        private void ClearInput()
+        {
+            tbInput.Clear();
         }
 
     }

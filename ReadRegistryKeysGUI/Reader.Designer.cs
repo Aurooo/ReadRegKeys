@@ -34,6 +34,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dvOutput = new System.Windows.Forms.DataGridView();
+            this.lblPath = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dvOutput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,10 +99,18 @@
             // dvOutput
             // 
             this.dvOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvOutput.Location = new System.Drawing.Point(15, 41);
+            this.dvOutput.Location = new System.Drawing.Point(15, 68);
             this.dvOutput.Name = "dvOutput";
-            this.dvOutput.Size = new System.Drawing.Size(413, 264);
+            this.dvOutput.Size = new System.Drawing.Size(413, 237);
             this.dvOutput.TabIndex = 4;
+            // 
+            // lblPath
+            // 
+            this.lblPath.AutoSize = true;
+            this.lblPath.Location = new System.Drawing.Point(12, 46);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(0, 13);
+            this.lblPath.TabIndex = 5;
             // 
             // Reader
             // 
@@ -109,6 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(514, 331);
+            this.Controls.Add(this.lblPath);
             this.Controls.Add(this.dvOutput);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnExit);
@@ -135,6 +145,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dvOutput;
+        private System.Windows.Forms.Label lblPath;
     }
 }
 
