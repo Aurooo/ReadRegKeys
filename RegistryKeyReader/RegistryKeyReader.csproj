@@ -41,17 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassesRoot.cs" />
-    <Compile Include="CurrentConfig.cs" />
-    <Compile Include="CurrentUser.cs" />
-    <Compile Include="IReadRegistry.cs" />
-    <Compile Include="LocalMachine.cs" />
+    <Compile Include="ClassesRootRegistryReader.cs" />
+    <Compile Include="CurrentConfigRegistryReader.cs" />
+    <Compile Include="CurrentUserRegistryReader.cs" />
+    <Compile Include="IRegistryReader.cs" />
+    <Compile Include="LocalMachineRegistryReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryFactory.cs" />
-    <Compile Include="RegistryReader.cs" />
+    <Compile Include="BaseRegistryReader.cs" />
     <Compile Include="RegistryStream.cs" />
     <Compile Include="RegistryValueElement.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="UsersRegistryReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

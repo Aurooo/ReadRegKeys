@@ -9,7 +9,7 @@ namespace RegistryKeyReader
         
         public IEnumerable<RegistryValueElement> Read(string path)
         {
-            IReadRegistry registryReader = new RegistryFactory().GetBaseKey(path);
+            IRegistryReader registryReader = new RegistryFactory().GetBaseKey(path);
             return registryReader.Read(path);
         }
     }

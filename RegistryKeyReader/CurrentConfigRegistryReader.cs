@@ -7,9 +7,9 @@ using Microsoft.Win32;
 
 namespace RegistryKeyReader
 {
-    class LocalMachine : RegistryReader
+    class CurrentConfigRegistryReader : BaseRegistryReader
     {
-        public LocalMachine() : base(Registry.LocalMachine)
+        public CurrentConfigRegistryReader() : base(Registry.CurrentConfig)
         {
         }
     }

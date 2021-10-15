@@ -7,10 +7,10 @@ using Microsoft.Win32;
 
 namespace RegistryKeyReader
 {
-    abstract class RegistryReader : IReadRegistry
+    abstract class BaseRegistryReader : IRegistryReader
     {
         protected readonly RegistryKey BaseKey;
-        protected RegistryReader(RegistryKey baseKey)
+        protected BaseRegistryReader(RegistryKey baseKey)
         {
             BaseKey = baseKey ?? throw new ArgumentNullException(nameof(baseKey));
         }

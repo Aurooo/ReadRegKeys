@@ -10,7 +10,7 @@ namespace RegistryKeyReader
     class RegistryFactory
     {
         const int INDEX_OF_BASE_KEY_NAME = 5;
-        public IReadRegistry GetBaseKey(string path)
+        public IRegistryReader GetBaseKey(string path)
         {
             if (!IsValidPath(path))
                 throw new Exception("Insert a valid key");
@@ -23,19 +23,19 @@ namespace RegistryKeyReader
             switch (baseKey.ToString())
             {
                 case "CURRENT_USER":
-                    return new CurrentUser();
+                    return new CurrentUserRegistryReader();
 
                 case "CLASSES_ROOT":
-                    return new ClassesRoot();
+                    return new ClassesRootRegistryReader();
 
                 case "LOCAL_MACHINE":
-                    return new LocalMachine();
+                    return new LocalMachineRegistryReader();
 
                 case "USERS":
-                    return new Users();
+                    return new UsersRegistryReader();
 
                 case "CURRENT_CONFIG":
-                    return new CurrentConfig();
+                    return new CurrentConfigRegistryReader();
 
                 default: throw new Exception($"No registry key found");
 
